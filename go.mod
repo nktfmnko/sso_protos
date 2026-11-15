@@ -1,4 +1,4 @@
-module protos
+module github.com/nktfmnko/sso_protos
 
 go 1.26.0
 
