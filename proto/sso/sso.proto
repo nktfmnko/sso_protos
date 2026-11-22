@@ -7,7 +7,7 @@ option go_package = "sso.v1;ssov1";
 service Auth{
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
-  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+  rpc Refresh (RefreshRequest) returns (RefreshResponse);
 }
 
 message RegisterRequest{
@@ -29,10 +29,11 @@ message LoginResponse{
   string token = 1; // auth token of logged in user
 }
 
-message IsAdminRequest{
-  int64 user_id = 1; // User ID to validate
+message RefreshRequest{
+  optional string refresh_token = 1; // users refresh token
 }
 
-message IsAdminResponse{
-  bool is_admin = 1; // Indicates whether the user is an admin
+message RefreshResponse{
+  string access_token = 1; // new access token
+  optional string refresh_token = 2; // new refresh token
 }
