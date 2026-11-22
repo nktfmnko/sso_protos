@@ -179,7 +179,8 @@ func (x *LoginRequest) GetAppId() int32 {
 
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"` // auth token of logged in user
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`                                         // auth token of logged in user
+	RefreshToken  *string                `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3,oneof" json:"refresh_token,omitempty"` // refresh token of logged in user
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -217,6 +218,13 @@ func (*LoginResponse) Descriptor() ([]byte, []int) {
 func (x *LoginResponse) GetToken() string {
 	if x != nil {
 		return x.Token
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetRefreshToken() string {
+	if x != nil && x.RefreshToken != nil {
+		return *x.RefreshToken
 	}
 	return ""
 }
@@ -330,9 +338,11 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x15\n" +
-	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"%\n" +
+	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"a\n" +
 	"\rLoginResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"L\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12(\n" +
+	"\rrefresh_token\x18\x02 \x01(\tH\x00R\frefreshToken\x88\x01\x01B\x10\n" +
+	"\x0e_refresh_token\"L\n" +
 	"\x0eRefreshRequest\x12(\n" +
 	"\rrefresh_token\x18\x01 \x01(\tH\x00R\frefreshToken\x88\x01\x01B\x10\n" +
 	"\x0e_refresh_token\"p\n" +
@@ -385,6 +395,7 @@ func file_sso_sso_proto_init() {
 	if File_sso_sso_proto != nil {
 		return
 	}
+	file_sso_sso_proto_msgTypes[3].OneofWrappers = []any{}
 	file_sso_sso_proto_msgTypes[4].OneofWrappers = []any{}
 	file_sso_sso_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}

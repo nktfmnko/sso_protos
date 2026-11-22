@@ -27,6 +27,7 @@ message LoginRequest{
 
 message LoginResponse{
   string token = 1; // auth token of logged in user
+  optional string refresh_token = 2; // refresh token of logged in user
 }
 
 message RefreshRequest{
