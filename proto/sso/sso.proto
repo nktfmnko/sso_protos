@@ -4,10 +4,13 @@ package auth;
 
 option go_package = "sso.v1;ssov1";
 
+import "google/protobuf/empty.proto";
+
 service Auth{
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc Refresh (RefreshRequest) returns (RefreshResponse);
+  rpc Logout (LogoutRequest) returns (google.protobuf.Empty);
 }
 
 message RegisterRequest{
@@ -37,4 +40,9 @@ message RefreshRequest{
 message RefreshResponse{
   string access_token = 1; // new access token
   optional string refresh_token = 2; // new refresh token
+}
+
+message LogoutRequest{
+  optional string refresh_token = 1; // users refresh token
+  optional bool revoke_all = 2; // revoke all sessions
 }
