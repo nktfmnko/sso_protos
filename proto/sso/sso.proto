@@ -44,5 +44,5 @@ message RefreshResponse{
 
 message LogoutRequest{
   optional string refresh_token = 1; // users refresh token
-  optional bool revoke_all = 2; // revoke all sessions
+  bool revoke_all = 2; // revoke all sessions
 }

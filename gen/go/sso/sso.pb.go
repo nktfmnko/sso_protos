@@ -329,7 +329,7 @@ func (x *RefreshResponse) GetRefreshToken() string {
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RefreshToken  *string                `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3,oneof" json:"refresh_token,omitempty"` // users refresh token
-	RevokeAll     *bool                  `protobuf:"varint,2,opt,name=revoke_all,json=revokeAll,proto3,oneof" json:"revoke_all,omitempty"`         // revoke all sessions
+	RevokeAll     bool                   `protobuf:"varint,2,opt,name=revoke_all,json=revokeAll,proto3" json:"revoke_all,omitempty"`               // revoke all sessions
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -372,8 +372,8 @@ func (x *LogoutRequest) GetRefreshToken() string {
 }
 
 func (x *LogoutRequest) GetRevokeAll() bool {
-	if x != nil && x.RevokeAll != nil {
-		return *x.RevokeAll
+	if x != nil {
+		return x.RevokeAll
 	}
 	return false
 }
@@ -402,13 +402,12 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0fRefreshResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12(\n" +
 	"\rrefresh_token\x18\x02 \x01(\tH\x00R\frefreshToken\x88\x01\x01B\x10\n" +
-	"\x0e_refresh_token\"~\n" +
+	"\x0e_refresh_token\"j\n" +
 	"\rLogoutRequest\x12(\n" +
-	"\rrefresh_token\x18\x01 \x01(\tH\x00R\frefreshToken\x88\x01\x01\x12\"\n" +
+	"\rrefresh_token\x18\x01 \x01(\tH\x00R\frefreshToken\x88\x01\x01\x12\x1d\n" +
 	"\n" +
-	"revoke_all\x18\x02 \x01(\bH\x01R\trevokeAll\x88\x01\x01B\x10\n" +
-	"\x0e_refresh_tokenB\r\n" +
-	"\v_revoke_all2\xe2\x01\n" +
+	"revoke_all\x18\x02 \x01(\bR\trevokeAllB\x10\n" +
+	"\x0e_refresh_token2\xe2\x01\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
